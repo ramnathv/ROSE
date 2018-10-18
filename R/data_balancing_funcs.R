@@ -23,7 +23,8 @@ ovun.sample <- function(formula, data, method="both", N, p=0.5, subset=options("
 	m <- match(c("formula", "data","method","N", "p", "seed", "subset", "na.action"), names(Call), 0L)
 	Call1 <- Call[c(1L, m)]
 	Call1[[1L]] <- omnibus.balancing
-	res <- eval(Call1)
+	e <- parent.frame()
+	res <- eval(Call1, envir = e)
 	out <- list(Call=match.call(), method=method, data=res$data)
 	class(out) <- "ovun.sample"
 	out
